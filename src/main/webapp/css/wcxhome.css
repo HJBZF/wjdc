@@ -1,0 +1,87 @@
+/*首页样式*/
+/* head 部分 */
+
+.wcxhome_head{height:68px;width: 100%;z-index:9999;background-color: #fff;border-bottom: 1px solid #e1e4e5;}
+
+.wcxhome_menu li{float: left;position: relative;}
+.wcxhome_menu a{font-size: 16px;color:#333;padding:0 16px;display: block;}
+
+.wcxhome_btn{margin:19px 0 0 15px;h}
+.wcxhome_btn li{float: left;margin-left: 10px;}
+.wcxhome_btn a{font-size: 16px;color:#ff941a;border: 1px solid #ff941a;display: block;width: 68px;line-height: 28px;text-align: center;border-radius:6px;}
+.first_survey{border-bottom: 2px solid #ff941a;}
+.first_survey span{color:#ff941a;}
+.survey span{color:#ff941a;}
+.wcxhome_menu li a:hover,.navitem:hover a{color:#ff941a;}
+.wcxhome_menu li:hover .subnav{display:block;}
+
+.subnav{position: absolute;top:58px;z-index:99;border: 1px solid #555;width: 605px;display: flex;box-shadow:0px 6px 12px rgba(0,0,0,0.16);border: 1px solid #e1e4e5;border-radius:6px;display:none;}
+.subnav li{width: 20%;background: #fff;}
+.subnav a{padding:9px 0;line-height: normal;margin:14px 0;text-align: center;font-size: 12px;color:#808080;border-right: 1px solid #e5e5e5;}
+.subnav:nth-child(5n) a{border-right:none;}
+.subnav li a span{vertical-align: middle;display: block;margin-top: 12px;}
+.subnav:hover .wcxhome_menu li a{color:#ff941a;}
+.navitem{position: relative;top:0;left:0;}
+.navitem:hover .subnav{display:block;}
+.navitem .transition{background: url(../img/arrow_gray.png);position: absolute;left:84px;top:28px;}
+.navitem:hover .transition{background: url(../img/arrow_orange.png);position: absolute;left:84px;top:28px;}
+
+
+.loginBack{width:131px;padding:10px 0;}
+
+/* 内容展示 */
+.container{background: url(../img/banner.jpg) no-repeat center;text-align: center;
+background-size: cover;position: relative;}
+
+.container .btn_free{font-size: 22px;padding:0 46px;line-height: 50px;border-radius: 25px;border: none;background: #ff941a;color:#fff;}
+.wcxhome_banner--star{position: absolute;top: -52px;right: -43px;width: 140px;height: 140px;background: url(../img/light.png) no-repeat;}
+
+.container_word {color:white;position: absolute;left:calc(50% - 170px);top:100px;}
+.container_word h1{position: relative;z-index:3;font-size: 54px;color:#dbdbdb;margin-bottom: 20px;}
+.container_word .h2{font-size: 22px;color:#fff;margin:20px 0 40px 0;}
+.container_word .emphasize{color:#ff9300;font-weight: bold;font-size: 20px;margin-right: 15px;}
+
+ .wcxhome_new{position: absolute;bottom:0;right:0;height: 80px;left:0;background-color: rgba(0,26,51,.6);color:#fff;}
+ .wcxhome_new .inner{width: 946px;margin:0 auto;line-height: 80px;}
+ .wcxhome_new p{font-size: 16px;color:#dbdbdb;line-height: 80px;padding:0 40px;}
+ .wcxhome_new .btn{line-height: 32px;padding:0 24px;border: 1px solid #ff941a;border-radius:17px;font-size: 16px;color:#ff941a;margin-top:23px;}
+
+/* 360度评测 */
+.scxhome_survey,.scxhome_360,.scxhome_form,.scxhome_vote,.scxhome_evaluation,.scxhome_user{height: 560px;position: relative;padding-bottom: 90px;}
+.survey{position: absolute;top:90px;left:216px;}
+
+ .content{width: 495px;position: absolute;top:195px;right:215px;}
+
+.content .h3{font-size: 16px;margin-bottom: 25px;}
+.content .features li{margin-bottom: 14px;overflow:hidden;}
+.content .features i{background-image: url(../img/tick_gray.png);width: 20px;height: 20px;line-height: inherit;margin-right: 10px;float:left;
+}
+.features .features_two{margin-left: 90px;}
+.features li .transition {background-image: url(../img/money_gray.png);
+}
+.content .btn{position: absolute;top:245px;left:0;}
+
+.btn-solid{font-size: 16px;color:#fff;padding:0 23px;line-height: 38px;border: none;border-radius:6px;}
+.background_gray{background-color: #f5f8fa;}
+.scxhome_360{height: 560px;position: relative;padding-bottom: 90px;}
+.scxhome_360 .application_pic{position: absolute;top:90px;right:216px;}
+
+.scxhome_360 .content{width: 495px;position: absolute;top:195px;left:215px;}
+
+/* 底部 */
+.wcxhome_foot{background: #494b4c;}
+.part_one{padding:74px 0 62px 0;width: 990px;margin:0 auto;position: relative;}
+.part_one::after{content:'';display:block;clear:both;}
+.part_two{background-color: #404142;}
+.logo_foot{margin:0 0 16px 0;}
+.contactinfo li{margin:0 0 6px 10px;}
+.contactinfo li img{margin-right: 10px;}
+.footlogo{width: 121px;height: 75px;margin-top: 10px;display:inline-block;}
+.foot_content{position: absolute;top:93px;left:200px;}
+.foot_content li{float: left;margin-left: 122px;}
+.foot_content .h3{font-size: 16px;font-weight: bold;color:#c4c9cc;margin:14px 0 12px 0;}
+.foot_content a{display:block;font-size: 14px;color:#84878a;margin-bottom: 4px;}
+.foot_content a:hover{color:#ff941a;transition: all 0.2s ease-in 0s;}
+
+.wcxhome_register{height: 60px;padding:15px 0 11px 0;width: 990px;margin:0 auto;}
+.wcxhome_register a{color: #7a7d80;}

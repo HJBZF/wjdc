@@ -1,0 +1,85 @@
+@charset "utf-8";
+/* CSS Document */
+#voteManage {
+    margin: 20px auto;
+    width: 600px;
+	background:#fff;
+}
+
+#voteManage:hover{
+	box-shadow:-20px 0 10px 0 #ff6700; 
+}
+
+
+#voteManage dl {
+    line-height: 40px;
+}
+#voteManage dl dt {
+    clear: left;
+    float: left;
+    text-align: right;
+    width: 80px;
+}
+#voteManage dl dd {
+    margin-left: 80px;
+}
+#voteManage dl dd input {
+    font-size: 14px;
+    margin: 8px 0;
+    vertical-align: middle;
+}
+#voteManage dl dd .input-text {
+    width: 380px;
+}
+#voteManage dl dd.button a {
+    margin: 0 10px;
+}
+
+.w600{
+	width:600px;
+}
+.box {
+    border: 2px solid #79a4cf;
+}
+.box h2 {
+    background: #79a4cf none repeat scroll 0 0;
+    color: #fff;
+    font-size: 14px;
+    line-height: 35px;
+    padding: 0 10px;
+}
+#voteManage .content {
+    font-size: 14px;
+    padding: 20px 40px;
+}
+body {
+    background: #fff none repeat scroll 0 0;
+    color: #333;
+    font-family: 宋体;
+    font-size: 12px;
+    line-height: 25px;
+    margin: 0;
+    padding: 10px 0;
+}
+h2, h4, p, ul, li, dl, dt, dd, form, input {
+    margin: 0;
+    padding: 0;
+}
+.input-text {
+    border: 1px solid #79a4cf;
+    padding: 2px 4px;
+}
+a:link, a:visited {
+    color: #06c;
+    text-decoration: none;
+}
+a:hover, a:active {
+    text-decoration: underline;
+}
+element.style {
+    background: rgba(0, 0, 0, 0) url(../../image/button_submit.gif) no-repeat scroll 0 0;
+    display: inline-block;
+    float: left;
+    height: 31px;
+    width: 76px;
+}

@@ -1,0 +1,15 @@
+*{margin: 0;padding: 0;}
+body{background: #fff;}
+ul,ol{list-style: none;}
+a{text-decoration: none;color:#333;}
+img{vertical-align: middle;border: 0;max-width: 100%;}
+
+
+.btn_blue{background-color: #1ea0fa;}
+.btn_orange{background-color: #ff941a;}
+
+.inner{margin:0 auto;width: 1200px;line-height: 66px;}
+.fl{float: left;}
+.fr{float: right;}
+.btn,.btnnew{display: inline-block;padding: 0 10px;margin-bottom:0;font-size: 12px;font-weight: normal;line-height: 1;text-align: center;white-space: nowrap;vertical-align: middle;cursor:pointer;}
+.clearfixed::after{content:'';display:block;clear:both;}

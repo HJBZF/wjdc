@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wcx.mapper.ManagerMapper">
+	<!-- 会员登录 -->
+	<select id="managerLogin" parameterType="Map" resultType="Manager">
+		select wcxmid,wcxmname,wcxmpwd,wcxmemail,wcxmalipay,wcxmpic,wcxqq,wcxwechat from wenchaxingmanager where wcxmname=#{wcxmname} and wcxmpwd=#{wcxmpwd} and status=1
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="manfindByPage" parameterType="Map" resultType="Manager">
+		select * from(select a.*,rownum rn from(
+			select * from wenchaxingmanager where status!=0 order by wcxmid) a
+			where rownum&lt;=#{pageNo}*#{pageSize}) where rn&gt;(#{pageNo}-1)*#{pageSize}
+	</select>
+	
+	<!-- 查询总记录条数 -->
+	<select id="getCount" resultType="double">
+        select count(wcxmid) total from wenchaxingmanager where status!=0
+    </select>
+    
+    <!-- 添加 -->
+	<insert id="addManager" parameterType="Manager">
+		<selectKey keyProperty="wcxmid" keyColumn="wcxmid" resultType="Integer" order="BEFORE">
+			select seq_wenchaxingmanager_wcxmid.nextval from dual
+		</selectKey>
+			insert into wenchaxingmanager(wcxmid,wcxmname,wcxmpwd,wcxmemail,wcxmalipay,wcxmpic,wcxqq,wcxwechat,status) values(#{wcxmid},#{wcxmname},#{wcxmpwd},#{wcxmemail},#{wcxmalipay},#{wcxmpic},#{wcxqq},#{wcxwechat},1)
+	</insert>
+	
+	<!-- 删除管理员，让状态为0 -->
+	<delete id="delManager"  parameterType="String">
+		update wenchaxingmanager set status=0 where wcxmid=#{wcxmids}
+	</delete>
+	
+	<!-- 删除 -->
+	<delete id="deleteManager" parameterType="Integer">
+        delete from wenchaxingmanager where wcxmid=#{wcxmid}
+    </delete>
+    
+	<!-- 修改问卷状态 -->
+	<update id="updateManStatus" parameterType="Map"> 
+		update wenchaxingmanager set status=#{status} where wcxmid=#{wcxmid}
+	</update>
+	
+	<!-- 修改图片 -->
+    <update id="updatePhoto" parameterType="Map">
+		update wenchaxingmanager set wcxmpic=#{wcxmpic} where wcxmid=#{wcxmid}
+	</update>
+	
+	<!-- 添加单个 -->
+	<insert id="addMan" parameterType="Manager">
+		<selectKey keyProperty="wcxmid" keyColumn="wcxmid" resultType="Integer" order="BEFORE">
+			select seq_wenchaxingmanager_wcxmid.nextval from dual
+		</selectKey>
+			insert into wenchaxingmanager(wcxmid,wcxmname,wcxmpwd,wcxmemail,wcxmalipay,wcxmpic,wcxqq,wcxwechat,status) values(#{wcxmid},#{wcxmname},#{wcxmpwd},#{wcxmemail},#{wcxmalipay},'/uploadfile/1522573542012_1513151458220_47604-106.jpg',#{wcxqq},#{wcxwechat},1)
+	</insert>
+	
+	<!-- parameterType 是进入这里语句中的数据类型，我们这里就是WcxmanagerBizImpl中的updateManager函数的map -->
+	<update id="updateManager" parameterType="Map"> 
+		update wenchaxingmanager set wcxmname=#{wcxmname}, wcxmpwd=#{wcxmpwd}, wcxmemail=#{wcxmemail}, wcxmalipay=#{wcxmalipay}, wcxqq=#{wcxqq},wcxwechat=#{wcxwechat} where wcxmid=#{wcxmid}
+	</update>
+</mapper>

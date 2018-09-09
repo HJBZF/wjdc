@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>问查星登录</title>
+	<link rel="stylesheet" href="css/index.css" type="text/css" />
+    <script type="text/javascript" src="js/jquery-1.9.1.js" ></script>
+    <link rel="icon" href="image/top_star.png"/>
+    
+    <meta name="applicable-device" content="pc" />
+    <style>
+        .divAnti input {
+            width: 140px !important;
+            padding-left: 16px !important;
+            border: none;
+            height: 46px !important;
+            line-height:46px !important;
+            font-size: 14px;
+            padding-left: 46px;
+            border-radius: 100px;
+            border: 1px solid #e6e6e6;
+            float: left !important;
+        }
+    </style>
+    <script type="text/javascript">
+    	function userInfoLogin(){
+    		var wcxuname = $.trim( $("#UserName").val() );
+    		var wcxupwd = $.trim( $("#Password").val() );
+    		
+    		if(wcxuname == "" || wcxupwd == ""){
+    			alert("登录失败，账号或密码不能为空 . . . ");
+    			return;
+    		}
+    		//alert(wcxuname + wcxupwd);
+    		$.post("userInfoLogin",{wcxuname:wcxuname,wcxupwd:wcxupwd},function(data){
+    			//alert(data);
+    			if(data!="" && data!=null){
+    				location.href="../index.jsp";
+    				/* window.location.href="../index.jsp"; */
+    			}else{
+    				alert("账号或密码输入错误，请重新输入 . . .");
+    			}
+    		},"json");
+    	}
+    </script>
+</head>
+
+<body id="body1" class="fp-viewing">
+<form name="form" method="post" action="login.jsp" id="form">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJNzQzNjY2MDEwZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAQUKUmVtZW1iZXJNZRppCRKv4euLWlb13uig5syGhGMV" />
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="C2EE9ABB" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAdDauF9KsVVsB7XO9dhBGbjR1LBKX1P1xh290RQyTesRRHS0B3lkDg8wcTlzQR027xcCvP9YJ59uTpXZUTciHnZ26vfsq8I56z0d7yQWHdFiycdcjStD50aK/ZrfWs/uQXcqaj6i4HaaYTcyD0yJuxuv3IfaPj6ShlhKbJGE1n8XtikOVc=" />
+</div>
+        <div class="fullpage-wrapper">
+            <div class="full-head clearfix">
+            <a href="/" id="sojumplogo" class="logo pull-left">
+                <img src="image/login_img/logo.png" alt="问卷星_不止问卷调查/在线考试">
+            </a>
+            <div class="member pull-right">
+                <a href="login.jsp" class="btn btn-default btn-lg pull-left login hidden" rel="nofollow">登入</a>
+                <a href="register.jsp" class="btn btn-default btn-lg pull-left register " rel="nofollow">注册</a>
+                <a href="../index.jsp" class="btn btn-default btn-lg pull-left back-wjx">返回首页</a>
+            </div>
+        </div>
+            <div class="fullpage-main"></div>
+            <div id="divSojump" class="validate-box">
+                <fieldset class="validate-wrapper">
+                    <h1 id="hlogintxt" class="validate-caption">问卷星登录</h1>
+                    <ul>
+                        <li>
+                            <label for="user-name" class="icon user-icon"></label>
+                            <input name="UserName" value="" id="UserName" name="user-name" placeholder="用户名/Email/手机" class="validate-input user-name" type="text" onfocus="if(value==&#39;用户名/Email/手机&#39;){value=&#39;&#39;;}" onblur="if(value==&#39;&#39;){value=&#39;用户名/Email/手机&#39;}" /><input type="hidden" name="hfUserName" id="hfUserName" />
+                            <div class="divclear"></div>
+                        </li>
+                        <li>
+                            <label for="password" class="icon password-icon"></label>
+                            <input name="Password" type="password" id="Password" placeholder="请输入登录密码" class="validate-input" />
+                        </li>
+                        <li id="liVerifyCode" class="obtain clearfix">
+                            <span id="divAntiSpam" class="divAnti">
+                                
+
+                            </span>
+                            <div id="user-warning-word" class="warning-word pull-left"></div>
+                        </li>
+                        
+
+                    </ul>
+                    <div id="trRemember" class="remember-box">
+                        <span class="automatic-box pull-left">
+                            <span class="login_checkbox centertxt"><input id="RememberMe" type="checkbox" name="RememberMe" /></span>下次自动登录 
+                        </span>
+                        <a id="PasswordRecoveryLink" class="get-back pull-right" href="register/forgetpassword.aspx">忘记用户名/密码？</a>
+                    </div>
+                </fieldset>
+                <fieldset class="submit-wrapper" style="text-align: center; margin-top: 20px;">
+                    <input type="button" name="LoginButton" value="登 录" id="LoginButton" class="submitbutton" onmouseover="this.className=&#39;submitbutton submitbutton_hover&#39;;" onmouseout="this.className=&#39;submitbutton&#39;;" style="color:White;" onclick="userInfoLogin()"/>
+                    <span style="color: red; line-height: 28px;">
+                        </span>
+                    <a href="register.html" id="hrefRegister" title="只需２０秒，就可完成注册" class="register-now">立即注册</a>
+                    <div class="third-party-login">
+                        <div class="third-party-txt">
+                            <em class="word" style="color:#888888;">第三方登录</em>
+                        </div>
+                        <div class="penguin-box">
+                            <a href="/connectnew.aspx" class="icon penguin-icon"></a>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            
+          <div class="feelings-wrapper">
+            <div style="margin-bottom:12px;font-size:20px;">《登顶武功山》</div>
+            <div style="padding-left:10px;font-size:16px;">拍摄于问卷星团队二月徒步之旅</div>
+        </div>
+        </div>
+    </form>
+</body>
+</html>

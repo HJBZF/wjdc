@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wcx.mapper.TemplateMapper">
+	<!-- 添加问卷类型 -->
+	<insert id="addTemplate" parameterType="Map">
+		<selectKey keyProperty="wcxtid" keyColumn="wcxtid" resultType="Integer" order="BEFORE">
+			select seq_wenchaxingtemplate_wcxtid.nextval from dual
+		</selectKey>
+		insert into wenchaxingtemplate(wcxtid,wcxtname,status) values(#{wcxtid},#{wcxtname},1)
+	</insert>
+	
+	<!-- parameterType 是进入这里语句中的数据类型，我们这里就是TemplateBizImpl中的updateTemplate函数的map -->
+	<update id="updateTemplate" parameterType="Map"> 
+		update wenchaxingtemplate set wcxtname=#{wcxtname} where wcxtid=#{wcxtid}
+	</update>
+	
+	<!-- 修改问卷状态 -->
+	<update id="updateTemStatus" parameterType="Map"> 
+		update wenchaxingtemplate set status=#{status} where wcxtid=#{wcxtid}
+	</update>
+	
+	<!-- 分页查询 -->
+	<select id="temfindByPage" parameterType="Map" resultType="Template">
+		select * from (select a.*,rownum rn from(select wcxtid,wcxtname,status from wenchaxingtemplate where status!=0 order by wcxtid) a
+              where rownum&lt;=#{pageNo}*#{pageSize}) where rn&gt;(#{pageNo}-1)*#{pageSize} 
+	</select>
+	
+	<!-- 删除问卷类型 -->
+	<delete id="delTemplate"  parameterType="String">
+		update wenchaxingtemplate set status=0 where wcxtid=#{wcxtids}
+	</delete>
+	
+	<!-- 查询总记录数,返回类型与BizImpl中返回类型相同 -->
+	<select id="temTotal" resultType="double">
+		select count(wcxtid) total from wenchaxingtemplate where status!=0
+	</select>
+</mapper>

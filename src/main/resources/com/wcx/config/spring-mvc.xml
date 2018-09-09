@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:annotation-config/>
+    
+	<import resource="classpath:com/wcx/config/spring-bean.xml"/>
+	
+	<context:component-scan base-package="com.wcx">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="utf-8"></constructor-arg>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/"></property>     <!-- prefix前缀 -->
+		<property name="suffix" value=".jsp"></property>   <!-- suffix后缀 -->
+	</bean>
+	
+	<mvc:default-servlet-handler/>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"></property>
+    	<property name="maxUploadSize" value="102128492"></property>
+	</bean>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/back/manager/*"/>
+			<mvc:mapping path="/back/assets/*"/>
+			<mvc:mapping path="/back/css/*"/>
+			<mvc:mapping path="/back/images/*"/>
+			<mvc:mapping path="/back/js/*"/>
+			<!-- <mvc:mapping path="/front/createblank.jsp"/> -->
+			<bean class="com.wcx.interceptor.CheckLoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+</beans>

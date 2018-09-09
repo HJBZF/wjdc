@@ -1,0 +1,233 @@
+<table id="Manager_data"></table>
+<div  id="img-container_2">
+	<img src="" id="imgBig_2" onclick="smallImg2()"/>
+</div>
+
+<style>
+	#img-container_2{
+		width:100%;
+		height:100%;
+		position:absolute;
+		left:0px;
+		top:0px;
+		background:rgba(255,255,255,0.7);
+		display:none;
+	}
+	
+	#img-container_2 img{
+		width:200px;
+		height:200px;
+		top:100px;
+		/* left:450px; */
+		left:30%;
+		position:absolute;
+		opacity:1;    <!-- 设置成不透明 -->
+	}
+</style>
+
+<script type="text/javascript">
+var adminEditRow = undefined;    //记录当前编辑的行的索引
+var adminOp;    //我们要返回到后台的值
+var adminFlag;
+var adminObj;    //通过这个对象来调用  adminObj.datagrid('', )   这个函数实现相关操作可以查看API寻找
+var oldPwd;  //保存旧密码
+
+adminObj = $('#Manager_data').datagrid({   
+    url:'../../manfindByPage', 
+    queryParams:{op:"manfindByPage"},
+    fitColumns:true,
+    pagination:true,
+    pageSize:5,
+    pageList:[5,10,15,20,25,30],
+    striped:true,
+    rownumbers:true,
+    sortName:"wcxmid",    //按照aid进行排序
+    remoteSort:false,
+    fit:true,
+    columns:[[   
+        {checkbox:true},
+        {field:'wcxmid',title:'管理员id',width:100,align:'center',sortable:true},   
+        {field:'wcxmname',title:'管理员姓名',width:100,align:'center',editor:{type:"text",options:{required:true}}},
+        {field:'wcxmpwd',title:'管理员密码',width:100,align:'center',editor:{type:"text",options:{required:true}}},
+        {field:'wcxmemail',title:'管理员email',width:100,align:'center',editor:{type:"text",options:{required:true}}},
+        {field:'wcxmalipay',title:'管理员支付宝',width:100,align:'center',editor:{type:"text",options:{required:true}}},
+        {field:'wcxmpic',title:'管理员头像',width:100,align:'center',sortable:true,formatter:function(val,row,index){
+        	wcxmpic = "<img src='"+val+"' width='80px' height='80px' onclick='bigImg2(this.src)'>";
+     	   return wcxmpic;
+        }},
+        {field:'wcxqq',title:'管理员QQ',width:100,align:'center',editor:{type:"text",options:{required:true}}},
+        {field:'wcxwechat',title:'管理员微信',width:100,align:'center',editor:{type:"text",options:{required:true}}},
+        {field:'status',title:'管理员状态',width:100,align:'center',formatter:function(val,row,index){
+     	   var str = "";
+		    	if(row.status == 1){		//属于正常状态
+		    		str += "<a href='javascript:manager_changeStatus("+row.wcxmid+",2)'>[冻结]</a>";
+		    	}else if(row.status == 2){		//属于冻结状态
+		    		str += "<a href='javascript:manager_changeStatus("+row.wcxmid+",1)'>[解冻]</a>";
+		    	}
+		    	return str;
+        }}
+    ]],
+    toolbar: [{
+    	/* text:"添加",
+		iconCls: 'icon-user-add',
+		handler: function(){
+			adminOp = "addManager";
+			adminFlag = "添加";
+			
+			if(adminEditRow != undefined){
+				adminObj.datagrid("rejectChanges");    //这个意思是回滚
+				adminEditRow = undefined;
+			}
+			adminObj.datagrid("insertRow",{index:0,row:{ } } );    //在指定位置插入行
+			adminObj.datagrid("beginEdit",0);     //指定位置开始编辑
+			adminEditRow = 0;
+		}
+	},'-',{ */
+		text:"修改",
+		iconCls: 'icon-user-edit',
+		handler: function(){
+			adminOp = "updateManager";
+			adminFlag = "修改";
+			
+			if(adminEditRow != undefined){    //有正在被编辑的行
+				adminObj.datagrid("endEdit",adminEditRow);     //结束编辑
+				adminObj.datagrid("rejectChanges");
+				adminEditRow = undefined;
+			}
+			
+			var row = adminObj.datagrid("getChecked")[0];
+			/* oldPwd = row.pwd; */
+
+			if(row == undefined){
+				$.messager.show({title:'温馨提示' , msg:'请选择您要修改的管理员信息 . . . ',timeout:2000,showType:'slide'});
+			}else{
+				var index = adminObj.datagrid("getRowIndex",row);
+				adminObj.datagrid("beginEdit",index);
+				adminEditRow = index;
+			}
+		}
+	},'-',{
+		text:"删除",
+		iconCls: 'icon-remove',
+		handler: function(){
+			var rows = adminObj.datagrid("getChecked");    //返回所有已被选中行的复选框
+			
+			if(rows.length <= 0){
+				$.messager.show({title:'温馨提示' , msg:'请选择您要删除的管理员信息 . . . ' , timeout:2000 , showType:'slide'});
+			}else{
+				$.messager.confirm('删除确认','数据一旦删除将不能恢复，您确定要删除吗 . . . ',function(r){
+					var i=0;
+					if(r){
+						var wcxmids = "";
+						
+						for(i=0,len=rows.length;i<len;i++){
+							wcxmids = wcxmids+rows[i].wcxmid+",";   //每个数据后面加上“，”，后台通过这个逗号来区分有几条数据
+						}
+						wcxmids = wcxmids.substring(0, wcxmids.length-1);   //去掉最后一个逗号
+						//alert(wcxmids);
+						$.post("../../delManager",{op:"deletetemplate",wcxmids:wcxmids},function(data){
+							data = parseInt( $.trim(data) );
+							if(data>0){
+								$.messager.show({title:'成功提示' , msg:'管理员信息删除成功 . . . ' , timeout:2000 , showType:'slide'});
+								adminObj.datagrid("reload");   //重载记录，跟load方法一样
+							}else{
+								adminObj.datagrid("rejectChanges");   //说明删除失败，数据回滚
+								$.messager.alert('失败提示' , '管理员信息删除失败  . . . ' , 'error');
+							}
+						},"text");
+					}
+				});
+			}
+		}
+	},'-',{
+		text:"彻底删除",
+		iconCls: 'icon-user-delete',
+		handler: function(){
+			var rows = adminObj.datagrid("getChecked");    //返回所有行的复选框已被选中。
+			console.info(rows);
+			if(rows.length <=0 ){
+				$.messager.show({title:'温馨提示' , msg:'请选择您要删除的管理员信息 . . . ' , timeout:2000 , showType:'slide'});
+			}else{
+				$.messager.confirm('删除确认' , '数据一旦删除将不能恢复，您确定要删除吗 . . .' , function(r){
+					if(r){
+						var i;
+						var ids = "";
+						
+						for(i=0,len=rows.length;i<len-1;i++){
+							ids += rows[i].wcxmid+",";    //每个数据之间插入"," 后台通过这个逗号来判断有多少数据要删除
+						}
+						ids +=rows[i].wcxmid;    //最后一个数据的后面不要加上  ","
+						//alert(ids);
+						//return;
+						$.post("../../deleteManager",{op:"deleteManager",ids:ids},function(data){
+							if(data>0){
+								$.messager.show({title:'成功提示' , msg:'管理员信息删除成功 . . . ' , timeout:2000 , showType:'slide'});
+								adminObj.datagrid("reload");      //重载记录，跟'load'方法一样但是重载的是当前页的记录而非第一页。
+							}else{
+								adminObj.datagrid("rejectChanges");    //说明删除失败，数据回滚
+								$.messager.alert('失败提示' , '管理员信息删除失败 . . . ' , 'error');
+							}
+						},'text');
+					}
+				});
+			}
+		}
+	},'-',{
+		text:"保存",
+		iconCls: 'icon-user-tick',
+		handler: function(){
+			if(adminEditRow != undefined){
+				adminObj.datagrid("endEdit",adminEditRow);   //结束编辑
+				//获取用户编辑的第一行
+				var rows = adminObj.datagrid("getChanges")[0];
+				
+					console.info(rows);
+				if(rows!=undefined){
+					rows.op = adminOp;
+					
+
+					$.post("../../"+adminOp,rows,function(data){
+						data = parseInt( $.trim(data) );
+						if(data>0){
+							$.messager.show( {title:"成功提示",msg:adminFlag+"管理员信息添加成功",timeout:2000,showType:'slide'} );
+							adminObj.datagrid("reload");
+						}else{
+							$.messager.alert("失败提示",adminFlag+"管理员信息添加失败 . . .","error");
+						}
+					},"text");
+				}
+			}
+		}
+	},'-',{
+		text:"撤销",
+		iconCls: 'icon-undo',
+		handler: function(){
+			adminFlag = "撤销";
+			
+			adminObj.datagrid("endEdit",adminEditRow);   //结束编辑
+			adminObj.datagrid("rejectChanges")   //回滚
+		}
+	}]
+}); 
+
+function manager_changeStatus(wcxmid,status){
+	$.post("../../updateManStatus",{wcxmid:wcxmid,status:status},function(data){
+		data = parseInt( $.trim(data) );
+		if(data>0){
+			$.messager.show({title:'成功提示',msg:'管理员信息操作成功',timeout:2000,showTupe:'slide'});
+			$("#Manager_data").datagrid("reload");    //使页面重新加载
+		}else{
+			$.messager.alert('失败提示','管理员信息操作失败，请重新修改 . . .','error');
+		}
+	},"text");
+}
+
+function bigImg2(src){
+	var img = new Image();
+	$("#img-container_2").css("display","block");
+	$("#imgBig_2").attr("src",src);
+}
+function smallImg2(){
+	$("#img-container_2").css("display","none");
+}
+</script>

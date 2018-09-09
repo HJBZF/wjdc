@@ -1,0 +1,311 @@
+@charset "utf-8";
+/* CSS Document */
+
+.main-wrapper .survey-wrapper .survey-list .warning-wrapper .warning-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/important_orange.png) no-repeat scroll center center;
+}
+.main-wrapper .survey-wrapper .survey-create {
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 200;
+}
+.main-wrapper .survey-wrapper .survey-create .create-search .search-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/search.png) no-repeat scroll center center;
+    border: medium none;
+    cursor: pointer;
+    height: 20px;
+    margin: 0;
+    position: absolute;
+    right: 11px;
+    top: 8px;
+    width: 25px;
+}
+.main-wrapper .survey-wrapper .survey-create .create-search .search-icon:hover {
+    background: rgba(0, 0, 0, 0) url(../../image/search1.png) no-repeat scroll center center;
+}
+.main-wrapper .survey-wrapper .survey-create .create-btn {
+    background-color: #fa911e;
+    border-color: #fa911e;
+    border-radius: 100px;
+    font-size: 16px;
+    height: 36px;
+    line-height: 2;
+    margin-right: 10px;
+    width: 120px;
+}
+.main-wrapper .survey-wrapper .survey-create .create-btn:hover {
+    background-color: #f08200;
+    border-color: #f08200;
+}
+.main-wrapper .survey-wrapper .survey-create .refuse-btn:hover .refuse-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/delete2.png) no-repeat scroll center center;
+}
+.main-wrapper .survey-wrapper .survey-create .refuse-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/delete-hover.png) no-repeat scroll center center;
+    height: 18px;
+    margin-right: 10px;
+    margin-top: -2px;
+    width: 18px;
+}
+.main-wrapper .survey-wrapper .survey-create .folder-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/folder-hover.png) no-repeat scroll center center;
+}
+.main-wrapper .survey-wrapper .survey-create .folderChild-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/user_18.png) no-repeat scroll center center;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .item-remind:hover .remind-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/remind-hover.png) no-repeat scroll center center;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .item-remind .remind-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/remind.png) no-repeat scroll center center;
+    height: 18px;
+    margin-right: 10px;
+    margin-top: -3px;
+    width: 18px;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .process-box .design-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/design.png) no-repeat scroll center center;
+    height: 24px;
+    width: 24px;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .process-box .relation-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/relationship_24.png) no-repeat scroll center center;
+    height: 24px;
+    width: 24px;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .process-box .recovery-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/recovery.png) no-repeat scroll center center;
+    height: 24px;
+    width: 24px;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .process-box .download-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/download.png) no-repeat scroll center center;
+    height: 24px;
+    width: 24px;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .process-box .process-1:hover .relation-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/relationship1_24.png) no-repeat scroll center center;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .process-box .process-1:hover .design-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/design-hover.png) no-repeat scroll center center;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .process-box .process-2:hover .design-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/design-hover.png) no-repeat scroll center center;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .process-box .process-2:hover .recovery-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/recovery-hover.png) no-repeat scroll center center;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .process-box .process-3:hover .download-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/download-hover.png) no-repeat scroll center center;
+}
+
+.main-wrapper .survey-wrapper .survey-list .item-bot .operation-box .stop-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/stop.png) no-repeat scroll center center;
+    height: 18px;
+    width: 18px;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .operation-box .release-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/release-hover.png) no-repeat scroll center center;
+    height: 18px;
+    width: 18px;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .operation-box .copy-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/copy.png) no-repeat scroll center center;
+    height: 18px;
+    margin-right: 10px;
+    width: 18px;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .operation-box .cutout-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/delete.png) no-repeat scroll center center;
+    height: 18px;
+    margin-right: 10px;
+    width: 18px;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .operation-box .folder-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/folder.png) no-repeat scroll center center;
+    height: 18px;
+    margin-right: 10px;
+    width: 18px;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .operation-box .copy-items:hover .copy-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/copy-hover.png) no-repeat scroll center center;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .operation-box .cutout-items:hover .cutout-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/delete-hover.png) no-repeat scroll center center;
+}
+.main-wrapper .survey-wrapper .survey-list .item-bot .operation-box .folder-items:hover .folder-icon {
+    background: rgba(0, 0, 0, 0) url(../../image/folder-hover.png) no-repeat scroll center center;
+}
+.main-wrapper .article-mini ul li {
+    background-color: #30a6f5;
+    margin-bottom: 1px;
+    position: relative;
+    text-align: center;
+    z-index: 101;
+}
+.main-wrapper .article-mini ul li .icon-box {
+    padding: 9px 0 6px;
+}
+.main-wrapper .article-mini ul li > a {
+    color: #fff;
+    display: block;
+    font-size: 12px;
+    height: 62px;
+    text-align: center;
+    width: 62px;
+}
+.main-wrapper .article-mini ul li::before {
+    content: "";
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    transform: scale(0, 0);
+    transition: all 0.5s cubic-bezier(0.3, 0, 0, 1.3) 0s;
+    width: 100%;
+    z-index: -1;
+}
+.main-wrapper .article-mini ul li:hover::before {
+    background-color: #0078c8;
+    opacity: 1;
+    transform: scale(1, 1);
+}
+.clearfix::before, .clearfix::after {
+    clear: both;
+    content: "";
+    display: block;
+    height: 0;
+}
+.main-wrapper .notsurvey {
+    margin: 20px 0 145px;
+    text-align: center;
+}
+.main-wrapper .survey-wrapper .survey-added {
+    display: inline-block;
+    width: 800px;
+}
+.main-wrapper .survey-wrapper .extend-box {
+    margin: 20px 0;
+    width: 100%;
+}
+.main-wrapper .survey-wrapper .extend-box .extend-items {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(51, 51, 51, 0.15);
+    height: 164px;
+    padding: 22px 30px;
+    width: 382px;
+}
+.main-wrapper .survey-wrapper .extend-box .extend-items h2 {
+    color: #30a6f5;
+    font-weight: bold;
+    margin-bottom: 6px;
+    text-align: left;
+}
+.main-wrapper .survey-wrapper .extend-box .extend-items p {
+    color: #808080;
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+.main-wrapper .survey-wrapper .extend-box .extend-items .btn {
+    border-radius: 100px;
+    border-width: 2px;
+    height: 30px;
+    line-height: 2.2;
+    width: 80px;
+}
+.main-wrapper .survey-wrapper .survey-added .article-mini {
+    margin: 0;
+    position: absolute;
+    right: -82px;
+    top: 0;
+}
+.main-wrapper .survey-wrapper .extend-box .extend-items {
+    padding: 26px 30px;
+}
+.main-wrapper .survey-wrapper .extend-box .extend-items p {
+    margin-bottom: 20px;
+}
+.main-wrapper .survey-wrapper .create-guide .create-btn {
+    font-size: 22px;
+    height: 48px;
+    margin-right: 0;
+    width: 160px;
+}
+.main-wrapper .survey-wrapper .create-guide h2 {
+    margin: 20px 0 10px;
+}
+.main-wrapper .survey-wrapper .survey-create .create-iconnew {
+    background: rgba(0, 0, 0, 0) url(../../image/create_21.png) no-repeat scroll center center;
+    height: 21px;
+    margin-right: 10px;
+    margin-top: -2px;
+    width: 21px;
+}
+img {
+    border: 0 none;
+    max-width: 100%;
+    vertical-align: middle;
+}
+h1, h2, h3, h4, h5 {
+    font-weight: normal;
+    margin: 0;
+}
+i, em {
+    font-style: normal;
+}
+.btn, .btnnew {
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1;
+    margin-bottom: 0;
+    padding: 0 10px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.btn-default {
+    background-color: #1ea0fa;
+    border-color: #1ea0fa;
+    color: #fff;
+}
+.btn-default:hover {
+    background-color: #0987db;
+    border-color: #0987db;
+    color: #fff;
+}
+.btn-lg {
+    border-radius: 6px;
+    line-height: 28px;
+}
+.btn-nobg {
+    background-color: transparent;
+    color: #1ea0fa;
+}
+* {
+    box-sizing: border-box;
+}
+.my-footer {
+    background-color: #f7f8f9;
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+.my-footer .line {
+    background-color: #808080;
+    display: inline-block;
+    height: 14px;
+    margin: 0 10px;
+    vertical-align: middle;
+    width: 1px;
+}

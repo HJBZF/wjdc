@@ -1,0 +1,154 @@
+<table id="template_data"></table>
+
+<script type="text/javascript">
+	var template_status = ["冻结","解冻"]
+	var templateEditRow = undefined;	//记录当前编辑行的 索引
+	var templateOp;		//我们返回后台的值
+	var templateFlag;		//这个Flag表示我们弹出窗口提示用户时进行的该操作名字
+	var templateObj;		//通过这个对象来调用  templateObj.datagrid(' ', ) ,相关函数看相关文档
+	
+	templateObj = $('#template_data').datagrid({   
+		url:'../../temfindByPage',
+		queryParams:{op:"temfindByPage"},
+		fitColumns:true,     //设置为true将自动使列适应表格宽度以防止出现水平滚动。
+		pagination:true,     //设置true将在数据表格底部显示分页工具栏。
+		pageSize:5,
+		pageList:[5,10,15,20],
+		striped:true,    //设置为true将交替显示行背景。
+		rownumbers:true,    //设置为true将显示行数。
+		sortName:"wcxtid",   //按照wcxtid来进行排序
+		fit:true,
+		columns:[[ 
+			{checkbox:true},
+		    {field:'wcxtid',title:'问卷类型编号',width:100,align:'center',sortable:true},   
+		    {field:'wcxtname',title:'问卷类型名称',width:200,align:'center',editor:{type:"text",options:{required:true}}},   
+		    {field:'status',title:'问卷类型状态',width:200,align:'center',formatter:function(val,row,index){
+		    	var str = "";
+		    	if(row.status == 1){		//属于正常状态
+		    		str += "<a href='javascript:template_changeStatus("+row.wcxtid+",2)'>[冻结]</a>";
+		    	}else if(row.status == 2){		//属于冻结状态
+		    		str += "<a href='javascript:template_changeStatus("+row.wcxtid+",1)'>[解冻]</a>";
+		    	}
+		    	return str;
+		    }}
+		]],
+		toolbar:[{
+	    	text:"添加",
+	    	iconCls:'icon-add1',
+	    	handler:function(){
+	    		//alert("添加");
+	    		templateOp = "addTemplate";
+	    		templateFlag = "添加";
+	    		
+	    		if(templateEditRow != undefined){
+	    			templateObj.datagrid("rejectChanges");   //进行回滚
+	    			templateEditRow = undefined;
+	    		}
+	    		templateObj.datagrid("insertRow",{index:0,row:{} } );   //在位置为0的位置插入一行 ，也就是第一行
+	    		templateObj.datagrid("beginEdit",0);   //指定位置开始编辑
+	    		templateEditRow = 0;
+	    	}
+	    },'-',{
+	    	text:"修改",
+	    	iconCls:'icon-advancedsettings',
+	    	handler:function(){
+	    		//alert("修改");
+	    		templateOp = "updateTemplate";
+	    		templateFlag = "修改";  
+	    		
+	    		if(templateEditRow != undefined){   //有正在被编辑的行
+	    			templateObj.datagrid("endEdit",templateEditRow);   //结束编辑
+	    			templateObj.datagrid("rejectChanges");   //回滚
+	    			templateEditRow = undefined;
+	    		}
+	    		
+	    		var row = templateObj.datagrid("getChecked")[0];
+	    		if(row == undefined){
+	    			$.messager.show( {title:'温馨提示' , msg:'请选择您要修改的问卷类型信息 . . . ' , timeout:2000 , showType:'slide'} );
+	    		}else{
+	    			var index = templateObj.datagrid("getRowIndex",row);
+	    			templateObj.datagrid("beginEdit",index);   //在相应的行中开始编辑
+	    			templateEditRow = index;
+	    		}
+	    	}
+	    },'-',{
+	    	text:"删除",
+			iconCls: 'icon-remove',
+			handler: function(){
+				var rows = templateObj.datagrid("getChecked");    //返回所有已被选中行的复选框
+				
+				if(rows.length <= 0){
+					$.messager.show({title:'温馨提示' , msg:'请选择您要删除的问卷类型信息 . . . ' , timeout:2000 , showType:'slide'});
+				}else{
+					$.messager.confirm('删除确认','数据一旦删除将不能恢复，您确定要删除吗 . . . ',function(r){
+						var i=0;
+						if(r){
+							var wcxtids = "";
+							
+							for(i=0,len=rows.length;i<len;i++){
+								wcxtids = wcxtids+rows[i].wcxtid+",";   //每个数据后面加上“，”，后台通过这个逗号来区分有几条数据
+							}
+							wcxtids = wcxtids.substring(0, wcxtids.length-1);   //去掉最后一个逗号
+							//alert(wcxtids);
+							$.post("../../delTemplate",{op:"deletetemplate",wcxtids:wcxtids},function(data){
+								data = parseInt( $.trim(data) );
+								if(data>0){
+									$.messager.show({title:'成功提示' , msg:'问卷类型信息删除成功 . . . ' , timeout:2000 , showType:'slide'});
+									templateObj.datagrid("reload");   //重载记录，跟load方法一样
+								}else{
+									templateObj.datagrid("rejectChanges");   //说明删除失败，数据回滚
+									$.messager.alert('失败提示' , '问卷类型删除失败  . . . ' , 'error');
+								}
+							},"text");
+						}
+					});
+				}
+			}
+	    },'-',{
+	    	text:"保存",
+			iconCls: 'icon-user-tick',
+			handler: function(){
+				//alert("保存");
+				if(templateEditRow != undefined){
+					templateObj.datagrid("endEdit",templateEditRow);   //那一行结束编辑
+					//获取用户编辑的第一行
+					var rows = templateObj.datagrid("getChanges")[0];
+					if(rows!=undefined){
+						rows.op = templateOp;
+						
+						$.post("../../"+templateOp,rows,function(data){
+							data = parseInt( $.trim(data) );
+							if(data>0){
+								$.messager.show( {title:"成功提示" , msg:templateFlag+"问卷类型信息成功" , timeout:2000 , showType:'slide'} );
+								templateObj.datagrid("reload");   //重载记录，跟load方法一样
+							}else{
+								$.messager.alert("失败提示" , templateFlag+"问卷类型信息失败 . . . " , "error");
+							}
+						},"text");
+					}
+				}
+			}
+	    },'-',{
+	    	text:"撤销",
+			iconCls: 'icon-undo',
+			handler: function(){
+				templateFlag = "撤销";
+				
+				templateObj.datagrid("endEdit",adminEditRow);   //结束编辑
+				templateObj.datagrid("rejectChanges")   //回滚
+			}
+	    }]
+	});
+	
+	function template_changeStatus(wcxtid,status){
+		$.post("../../updateTemStatus",{wcxtid:wcxtid,status:status},function(data){
+			data = parseInt( $.trim(data) );
+			if(data>0){
+				$.messager.show({title:'成功提示',msg:'问卷类型信息操作成功',timeout:2000,showTupe:'slide'});
+				$("#template_data").datagrid("reload");    //使页面重新加载
+			}else{
+				$.messager.alert('失败提示','问卷类型信息操作失败，请重新修改 . . .','error');
+			}
+		},"text");
+	}
+</script>

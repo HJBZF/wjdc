@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.wcx.mapper.SurveyMapper">
+	<!-- 添加问卷 -->
+	<insert id="addSurvey"  parameterType="Map">
+		<selectKey keyProperty="wcxsid" keyColumn="wcxsid" resultType="Integer" order="BEFORE">
+			select seq_wenchaxingsurvey_wcxsid from dual
+		</selectKey>
+		insert into wenchaxingsurvey values(#{wcxsid},#{wcxuid},#{wcxsname},#{wcxtid},#{wcxintroduce},
+       		to_date('#{wcxbdate}','yyyy-mm-dd'),to_date('#{wcxtime}','yyyy-mm-dd'),1)
+	</insert>
+	
+	<select id="findByPageSurvey"  parameterType="Map"  resultType="Survey">
+		select * from (select a.*,rownum rn from(select * from wenchaxingsurvey where status!=0 order by wcxsid) a
+              where rownum &lt; =#{pageNo}*#{pageSize}) where rn &gt; (#{pageNo}-1)*#{pageSize}
+	</select>
+	
+	<!-- 修改问卷名 -->
+	<update id="updateSurvey" parameterType="Map"> 
+		update wenchaxingsurvey set wcxsname=#{wcxsname} where wcxsid=#{wcxsid}
+	</update>
+	
+	<!-- 修改问卷状态 -->
+	<update id="updateSurStatus" parameterType="Map"> 
+		update wenchaxingsurvey set status=#{status} where wcxsid=#{wcxsid}
+	</update>
+	
+	<!-- 删除问卷 -->
+	<delete id="delSurvey"  parameterType="String">
+		update wenchaxingsurvey set status=0 where wcxsid=#{wcxsids}
+	</delete>
+	
+	<!-- 查询总记录数,返回类型与BizImpl中返回类型相同 -->
+	<select id="surTotal" resultType="double">
+		select count(wcxsid) total from wenchaxingsurvey where status!=0
+	</select>
+</mapper>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wcx.mapper.UserInfoMapper">
+	<!-- 注册用户 -->
+	<insert id="userInfoReg" parameterType="UserInfo">
+		<selectKey keyProperty="wcxuid" keyColumn="wcxuid" resultType="Integer" order="BEFORE">
+			select seq_wenchaxinguserInfo_wcxuid.nextval from dual
+		</selectKey>
+			insert into wenchaxinguserInfo(wcxuid,wcxuname,wcxupwd,wcxuemail,status) values(#{wcxuid},#{wcxuname},#{wcxupwd},#{wcxuemail},1)
+	</insert>
+	
+	<!-- 登录用户 -->
+	<select id="userInfoLogin" parameterType="Map" resultType="UserInfo">
+		<!-- select * from wenchaxinguserInfo where wcxuname=#{wcxuname,jdbcType=VARCHAR} and wcxupwd=#{wcxupwd,jdbcType=VARCHAR} -->
+		<!-- select wcxuid,wcxuname,wcxuemail,wcxualipay,wcxuphoto,wcxupwd,wcxuqq,wcxuwechat from wenchaxinguserInfo where wcxuname=#{wcxuname} and wcxupwd=#{wcxupwd} and status=1 -->
+		select * from wenchaxinguserInfo where wcxuname=#{wcxuname} and wcxupwd=#{wcxupwd,jdbcType=VARCHAR} and status=1
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="userfindByPage" parameterType="Map" resultType="UserInfo">
+		select * from(select a.*,rownum rn from(
+			select * from wenchaxinguserInfo where status!=0 order by wcxuid) a
+			where rownum&lt;=#{pageNo}*#{pageSize}) where rn&gt;(#{pageNo}-1)*#{pageSize}
+	</select>
+	
+	<!-- 查询总记录条数 -->
+	<select id="getCount" resultType="double">
+        select count(wcxuid) total from wenchaxinguserInfo where status!=0
+    </select>
+	
+	<!-- 添加 -->
+	<insert id="addUser" parameterType="UserInfo">
+		<selectKey keyProperty="wcxuid" keyColumn="wcxuid" resultType="Integer" order="BEFORE">
+			select seq_wenchaxinguserInfo_wcxuid.nextval from dual
+		</selectKey>
+			insert into wenchaxinguserInfo(wcxuid,wcxuname,wcxuemail,wcxualipay,wcxuphoto,wcxupwd,wcxuqq,wcxuwechat) values(#{wcxuid},#{wcxuname},#{wcxuemail},#{wcxualipay},#{wcxuphoto},#{wcxupwd},#{wcxuqq},#{wcxuwechat})
+	</insert>
+	
+	<!-- 删除 -->
+	<delete id="deleteUser" parameterType="Integer">
+        delete from wenchaxinguserInfo where wcxuid=#{wcxuid}
+    </delete>
+    
+    <!-- 删除用户，让状态为0 -->
+	<delete id="delUserInfo"  parameterType="String">
+		update wenchaxinguserInfo set status=0 where wcxuid=#{wcxuids}
+	</delete>
+    
+    <!-- 修改用户状态 -->
+	<update id="updateUserStatus" parameterType="Map"> 
+		update wenchaxinguserInfo set status=#{status} where wcxuid=#{wcxuid}
+	</update>
+    
+    <!-- 修改图片 -->
+    <update id="updateUPhoto" parameterType="Map">
+		update wenchaxinguserInfo set wcxuphoto=#{wcxuphoto} where wcxuid=#{wcxuid}
+	</update>
+	
+	<!-- 修改    parameterType 是进入这里语句中的数据类型，我们这里就是WcxmanagerBizImpl中的updateManager函数的map -->
+	<update id="updateUserInfo" parameterType="Map"> 
+		update wenchaxinguserInfo set wcxuname=#{wcxuname}, wcxuemail=#{wcxuemail}, wcxualipay=#{wcxualipay}, wcxupwd=#{wcxupwd}, wcxuqq=#{wcxuqq},wcxuwechat=#{wcxuwechat} where wcxuid=#{wcxuid}
+	</update>
+</mapper>

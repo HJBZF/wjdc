@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+body,html{width: 100%;height: 100%;font-family: '微软雅黑';margin:0;color:#333;min-width:1024px;}
+            a,a:link,a:active{color:#075DB3;text-decoration:none;}
+            .bg{background: url(../../img/bacg.jpg) no-repeat center;height: 100%;position: relative;top:0;left:0;}
+            .head{height:95px;position: relative;}
+            .logo{width: 150px;height: 95px;position: absolute;left:59px;bottom:0;}
+            .head a{display: inline-block;float: left;height: 42px;}
+
+            .login{width: 90px;height: 40px;}
+
+            .info{width: 300px;position: absolute;top:38px;right:100px;}
+            .info .btn{font-size: 18px;color:#fff;line-height: 42px;margin-left: 20px;border-radius:100px;background-color: transparent;border:1px solid #fff;text-decoration: none;text-align: center;}
+
+            .backwcx{padding:0 25px 0 25px;}
+            .backwcx:hover,.login:hover{border-width:2px}
+
+            .validate-box{width: 480px;margin:0 auto;position: fixed;top:calc(50% - 270px);left:calc(50% - 251px);background: rgba(255,255,255,1);border-radius:14px;}
+            .validate-wrapper{padding:0 50px;}
+            .validate-box .validate-caption{font-size: 24px;line-height: 24px;font-weight: bold;color: #fa9111;padding:40px 0;text-align: left;}
+            .validate-wrapper li{padding-bottom: 20px;}
+
+
+            .validate-box .validate-wrapper .validate-input{border:none;width: 90%;height: 46px;line-height: 1.4;font-size: 14px;padding: 10px 0 10 46px;border-radius:100px;border: 1px solid #e6e6e6;background: #fff !important;}
+            .validate-wrapper{margin-left: 20px;display: block;}
+            .validate-wrapper label[class="error green"]{background-color: #81c763;}
+            .validate-wrapper label[class="error green"]::before{content:'';display: block;position: absolute;left:-4px;top:11px;border-top: 4px solid transparent;border-bottom: 4px solid transparent;border-right-color: #ff6161;border-right: 4px dashed #81c763;border-radius:4px;}
+            .validate-wrapper label[class="error red"]{background-color: #ff6161;}
+
+            .validate-wrapper label[class="error red"]::before{content:'';display: block;position: absolute;left:-4px;top:11px;border-top: 4px solid transparent;border-bottom: 4px solid transparent;border-right-color: #ff6161;border-right: 4px dashed #ff6161;border-radius:4px;}
+
+
+            .validate-wrapper label[class="error blue"]{background-color: #30a6f5;}
+
+            .validate-wrapper label[class="error blue"]::before{content:'';display: block;position: absolute;left:-4px;top:11px;border-top: 4px solid transparent;border-bottom: 4px solid transparent;border-right-color: #ff6161;border-right: 4px dashed #30a6f5;border-radius:4px;}
+
+            #Register1_pn1Create ul li{position: relative;}
+            .validate-box .user-icon{background: url(../../img/user.png) no-repeat center;display: block;width: 20px;height: 20px;position: absolute;top:14px;left:14px;}
+            .validate-box .icon-password{background: url(../../img/password.png) no-repeat center;display: block;width: 20px;height: 20px;position: absolute;top:14px;left:14px;}
+            .validate-box .icon-photo{background: url(../../img/tel.png) no-repeat center;display: block;width: 20px;height: 20px;position: absolute;top:14px;left:14px;}
+            #Register1_UserName{padding:0 5px 0 40px;}
+            #Register1_password{padding:0 5px 0 40px;}
+            #Register1_tel{padding:0 5px 0 40px;}
+
+            .error{position: absolute;right: -230px;top: 8px;font-size: 12px;color: #fff;line-height: 2.5;width: 200px;padding-left: 10px;text-align: left;}
+            .error::before{content:'';display: block;position: absolute;left:-4px;top:11px;border-top: 4px solid transparent;border-bottom: 4px solid transparent;border-right-color: #ff6161;border-right: 4px dashed #ff6161;border-radius:4px;}
+            .submitbutton{width:100%;height:46px;font-size: 20px;border-radius:100px;background-color:#fa911e;border:none;display:inline-block;line-height: 30px;background: #f17819;color:#fff;padding:0 15px;overflow: visible;}
+
+            .clearfix::before{content:'';display:block;clear:both;}
+            #Register1_pn1Create .log-on {font-size: 18px; margin: 16px 100px 26px;display: block;color:#fa911e;}
